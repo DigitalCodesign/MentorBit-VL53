@@ -36,12 +36,12 @@ MentorBitVL53::MentorBitVL53(){
 
 }
 
-void MentorBitVL53::begin(){
+void MentorBitVL53::begin(uint16_t time_budget = 200){
 
     Wire.begin();
     vl53.begin(0x52, &Wire);
     vl53.startRanging();
-    vl53.setTimingBudget(50);
+    vl53.setTimingBudget(time_budget);
     _last_distance = 0;
 
 }
@@ -49,8 +49,7 @@ void MentorBitVL53::begin(){
 uint16_t MentorBitVL53::leerDistancia(){
 
     if(vl53.dataReady()){
-        uint16_t actual_distance = vl53.distance();
-        _last_distance = actual_distance;
+        _last_distance = vl53.distance();
         vl53.clearInterrupt();
     }
 

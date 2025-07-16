@@ -43,7 +43,7 @@
         public:
 
             MentorBitVL53();
-            void begin();
+            void begin(uint16_t time_budget = 200);
             uint16_t leerDistancia();
 
         private:
